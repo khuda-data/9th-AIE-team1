@@ -9,4 +9,6 @@ Rules:
 - Include source evidence excerpts.
 - Include missing_fields with user-friendly follow-up questions.
 - Return JSON matching the configured Pydantic schema.
-
+- Preserve the source language when writing titles, summaries, evidence, and questions.
+- If the source document is Korean, write user-facing fields in Korean.
+- Structure each experience using situation, task, action, result, and learned fields when available.

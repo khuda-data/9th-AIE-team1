@@ -19,6 +19,7 @@ OpenAPI 산출물:
 | GET | `/api/experiences/{experience_id}` | 경험 상세 조회 |
 | POST | `/api/experience-questions/{question_id}/answer` | 보완 질문 답변 |
 | POST | `/api/retrieval/search` | 경험 검색 |
+| POST | `/api/recommendations/experiences` | JD/문항 기반 경험 추천 |
 
 ## API 사용 순서
 
@@ -27,8 +28,10 @@ OpenAPI 산출물:
   -> 문서 처리
   -> 처리 결과 조회
   -> 경험 상세 조회
+  -> JD/문항 입력
+  -> 경험 추천 요청
+  -> 추천 결과 확인
   -> 보완 질문 답변
-  -> 경험 검색
 ```
 
 ## 테스트용 입력 예시
