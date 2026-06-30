@@ -7,9 +7,9 @@ from app.core.errors import AppError, app_error_handler, unhandled_error_handler
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="Career Vault API",
+        title="KHU:DArchive API",
         version="0.1.0",
-        description="APIs for storing past career records as a RAG-ready experience vault.",
+        description="APIs for storing past career records as a RAG-ready archive.",
     )
 
     app.add_middleware(
@@ -32,4 +32,3 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
-

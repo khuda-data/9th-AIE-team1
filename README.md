@@ -1,70 +1,55 @@
-# [프로젝트 제목]
+# KHU:DArchive
 
-  > KHUDA 9기 · 정기학술제
+> KHUDA 9기 · 정기학술제
 
-  ## 소개
-  KHUDA 9기 AIE 1조입니다!
+## 소개
 
-  ## 팀원
-  | 이름 | 역할 |
-  | :---: | :--- |
-  | 김연길 | [역할] |
-  | 김정원 | [역할] |
-  | 서지은 | [역할] |
-  | 신진수 | [역할] |
-  
-  ## 대표 사진
-  [대표 사진을 넣어주세요.]
+KHU:DArchive는 사용자의 자기소개서, 이력서, 포트폴리오 메모 등 흩어진 커리어 기록을 경험 단위로 정리하고, 이후 개인화 추천과 문서 작성에 활용할 수 있는 경험 저장소를 만드는 프로젝트입니다.
 
-## 프로젝트 요약
+## 팀원
 
-사용자의 과거 자기소개서, 이력서, 포트폴리오 메모를 경험 단위로 정리하고 RAG 검색에 사용할 수 있는 경험 vault를 만드는 백엔드 MVP입니다.
+| 이름 | 역할 |
+| :---: | :--- |
+| 김연길 | [역할] |
+| 김정원 | [역할] |
+| 서지은 | [역할] |
+| 신진수 | [역할] |
 
-현재 범위는 추천 결과 생성이 아니라, 추천 단계가 사용할 데이터 파이프라인을 구축하는 것입니다.
+## 대표 사진
 
-## 빠른 시작
+![대표 사진 1](docs/assets/image1.png)
 
-```bash
-cd apps/backend
-python -m pip install -e ".[test]"
-python -m pytest -q
+![대표 사진 2](docs/assets/image2.png)
+
+## 기술 스택
+
+- Backend: Python, FastAPI, SQLAlchemy, Alembic, Pydantic
+- Database: PostgreSQL, pgvector
+- AI: LangChain, OpenAI LLM, OpenAI Embeddings
+- Infrastructure: Docker Compose
+- Test: pytest
+
+## 구조
+
+```text
+.
+├── apps/
+│   ├── backend/          # FastAPI backend
+│   └── frontend/         # frontend workspace
+├── packages/
+│   └── api-client/       # generated API client workspace
+├── infra/
+│   └── postgres/         # local PostgreSQL/pgvector setup
+├── docs/                 # project documentation
+├── scripts/              # utility scripts
+├── docker-compose.yml
+└── README.md
 ```
-
-로컬 DB까지 실행하려면 다음 문서를 참고하세요.
-
-- [개발 및 실행 가이드](docs/development.md)
 
 ## 문서
 
-- [문서 홈](docs/README.md)
-- [아키텍처](docs/architecture/README.md)
-- [API 가이드](docs/api.md)
-- [OpenAPI JSON](docs/openapi/openapi.json)
-- [OpenAPI YAML](docs/openapi/openapi.yaml)
-
-## 주요 경로
-
-- `apps/backend`: FastAPI 백엔드 구현
-- `apps/frontend`: 추후 프론트엔드 구현을 위한 placeholder
-- `packages/api-client`: 추후 OpenAPI 기반 client 생성을 위한 placeholder
-- `infra/postgres`: 로컬 PostgreSQL/pgvector 초기화
-- `docs`: 세부 문서와 OpenAPI 산출물
-- `scripts`: 보조 스크립트
-
-## 현재 구현 범위
-
-- 텍스트 기록 입력 및 원문 보존
-- LLM 기반 경험 후보 추출
-- 경험 출처, chunk, embedding 저장
-- 부족한 정보에 대한 보완 질문 생성
-- 질문 답변 반영 후 경험/chunk/embedding 갱신
-- 사용자별 경험 조회 및 retrieval search API
-
-## 제외 범위
-
-- 프론트엔드 UI
-- JD/문항 기반 경험 추천
-- 자기소개서 초안 생성
-- 면접 질문 생성
-- ATS 점수화
-- 배포 인프라
+- [프로젝트 개요](docs/project.md)
+- [사용자 시나리오](docs/scenarios.md)
+- [시스템 구성](docs/architecture.md)
+- [API 문서](docs/api.md)
+- [로컬 개발 및 실행](docs/development.md)

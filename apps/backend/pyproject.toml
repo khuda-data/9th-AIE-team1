@@ -1,7 +1,7 @@
 [project]
-name = "career-vault-backend"
+name = "khudarchive-backend"
 version = "0.1.0"
-description = "Career experience vault backend"
+description = "KHU:DArchive backend"
 requires-python = ">=3.11"
 dependencies = [
     "alembic>=1.13.0",

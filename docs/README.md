@@ -1,18 +1,20 @@
-# Documentation
+# 문서 홈
 
-이 디렉터리는 Career Vault backend MVP의 세부 문서를 보관합니다.
+KHU:DArchive 프로젝트 문서의 진입점입니다.
 
 ## 문서 목록
 
-- [개발 및 실행 가이드](development.md)
-- [API 가이드](api.md)
-- [아키텍처](architecture/README.md)
-- [OpenAPI JSON](openapi/openapi.json)
-- [OpenAPI YAML](openapi/openapi.yaml)
+- [프로젝트 개요](project.md): 프로젝트 목적, 기능, 화면 구성, 범위
+- [사용자 시나리오](scenarios.md): 주요 사용 흐름과 API 사용 예시
+- [시스템 구성](architecture.md): 시스템 구조, 기술 스택, 데이터 흐름
+- [API 문서](api.md): 주요 API와 OpenAPI 산출물
+- [로컬 개발 및 실행](development.md): backend 로컬 실행, DB, 테스트, OpenAPI export
 
-## 프로젝트 목적
+## 관련 경로
 
-사용자가 입력한 과거 기록을 경험 단위로 정리하고, 이후 추천 단계에서 사용할 수 있는 RAG-ready vault를 구축합니다.
-
-현재 구현은 `apps/backend`의 수집/정리/검색 파이프라인에 집중합니다.
-
+- `apps/backend`: backend 애플리케이션
+- `apps/frontend`: frontend 워크스페이스
+- `packages/api-client`: API client 워크스페이스
+- `infra/postgres`: 로컬 DB 초기화
+- `docs/assets`: 문서 이미지
+- `docs/openapi`: OpenAPI 산출물

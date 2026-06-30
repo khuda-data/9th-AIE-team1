@@ -1,6 +1,6 @@
-"""initial career vault schema
+"""initial KHU:DArchive schema
 
-Revision ID: 0001_initial_career_vault
+Revision ID: 0001_initial_khudarchive
 Revises:
 Create Date: 2026-06-26
 """
@@ -10,7 +10,7 @@ from collections.abc import Sequence
 import sqlalchemy as sa
 from alembic import op
 
-revision: str = "0001_initial_career_vault"
+revision: str = "0001_initial_khudarchive"
 down_revision: str | None = None
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
@@ -120,4 +120,3 @@ def downgrade() -> None:
     op.drop_table("experiences")
     op.drop_table("source_documents")
     op.drop_table("users")
-

@@ -1,21 +1,22 @@
-# Development Guide
+# 로컬 개발 및 실행
 
-## Requirements
+## 요구 사항
 
 - Python 3.11+
 - Docker
-- PostgreSQL with pgvector
+- PostgreSQL
+- pgvector
 
-## Install
+## 의존성 설치
 
 ```bash
 cd apps/backend
 python -m pip install -e ".[test]"
 ```
 
-## Environment
+## 환경 변수
 
-`.env.example`을 기준으로 환경 변수를 설정합니다.
+루트의 `.env.example`을 기준으로 설정합니다.
 
 ```env
 DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/experience_vault
@@ -27,9 +28,9 @@ EMBEDDING_DIMENSION=1536
 OPENAI_API_KEY=
 ```
 
-로컬 테스트 기본값은 fake LLM/fake embedding입니다.
+로컬 테스트는 기본적으로 fake LLM과 fake embedding을 사용합니다.
 
-실제 OpenAI 연동을 사용할 때는 다음 값을 설정합니다.
+OpenAI 연동을 사용하려면 다음 값을 설정합니다.
 
 ```env
 LLM_PROVIDER=openai
@@ -39,40 +40,38 @@ OPENAI_API_KEY=...
 
 LLM과 embedding 호출은 LangChain의 `langchain-openai` wrapper를 사용합니다.
 
-## Local Database
+## 로컬 DB 실행
 
 ```bash
 docker compose up -d postgres
 ```
 
-## Migration
+## 마이그레이션
 
 ```bash
 cd apps/backend
 alembic upgrade head
 ```
 
-## Run Server
+## 서버 실행
 
 ```bash
 cd apps/backend
 uvicorn app.main:app --reload
 ```
 
-서버 실행 후 다음 경로를 사용할 수 있습니다.
+서버 실행 후 다음 주소를 사용할 수 있습니다.
 
 - `http://localhost:8000/docs`
 - `http://localhost:8000/redoc`
 - `http://localhost:8000/openapi.json`
 
-## Tests
+## 테스트
 
 ```bash
 cd apps/backend
 python -m pytest -q
 ```
-
-현재 테스트는 text cleaning, completeness scoring, chunk 생성, 문서 처리 파이프라인, 질문 답변 반영, retrieval 흐름을 검증합니다.
 
 ## OpenAPI Export
 
@@ -84,4 +83,3 @@ python scripts/export_openapi.py
 
 - `docs/openapi/openapi.json`
 - `docs/openapi/openapi.yaml`
-

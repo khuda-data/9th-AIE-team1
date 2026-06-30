@@ -1,5 +1,7 @@
 # Frontend
 
-Frontend implementation is out of scope for this task.
-This directory is reserved for the future web client.
+프론트엔드 워크스페이스입니다.
 
+향후 사용자 기록 입력, 경험 목록, 경험 상세, 보완 질문, 검색 화면을 담당합니다.
+
+현재는 백엔드 API와 문서화 작업을 우선하며, 프론트엔드 구현은 별도 단계에서 진행합니다.
