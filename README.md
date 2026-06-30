@@ -23,11 +23,11 @@ KHU:DArchive는 사용자의 자기소개서, 이력서, 포트폴리오 메모 
 
 ## 기술 스택
 
-- Backend: Python, FastAPI, SQLAlchemy, Alembic, Pydantic
-- Database: PostgreSQL, pgvector
-- AI: LangChain, OpenAI LLM, OpenAI Embeddings
-- Infrastructure: Docker Compose
-- Test: pytest
+- `Backend: Python, FastAPI, SQLAlchemy, Alembic, Pydantic`
+- `Database: PostgreSQL, pgvector`
+- `AI: LangChain, OpenAI LLM, OpenAI Embeddings`
+- `Infrastructure: Docker Compose`
+- `Test: pytest`
 
 ## 구조
 
