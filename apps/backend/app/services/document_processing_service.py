@@ -55,6 +55,8 @@ class DocumentProcessingService:
             question_count = 0
 
             for draft in extraction.experiences:
+                if not self._is_meaningful_experience(draft):
+                    continue
                 experience = self._persist_experience(document.user_id, draft)
                 self._persist_source(experience.id, document.id, draft)
                 chunks = self.chunker.build_chunks(experience, document.id)
@@ -83,6 +85,24 @@ class DocumentProcessingService:
             if isinstance(exc, AppError):
                 raise
             raise AppError(500, "document_processing_failed", str(exc)) from exc
+
+    @staticmethod
+    def _is_meaningful_experience(draft: ExperienceDraft) -> bool:
+        evidence_text = " ".join(e.excerpt for e in draft.evidence if e.excerpt)
+        core_parts = [
+            draft.summary,
+            draft.organization,
+            draft.role,
+            draft.star.situation,
+            draft.star.task,
+            draft.star.action,
+            draft.star.result,
+            draft.star.learned,
+            evidence_text,
+        ]
+        has_core_content = any(part and part.strip() for part in core_parts)
+        has_classification = bool(draft.experience_type or draft.skills or draft.competencies or draft.keywords)
+        return has_core_content or has_classification
 
     def summaries_for_document(self, document_id: str) -> list[ExperienceProcessingSummary]:
         experiences = self.experiences.list_by_document(document_id)
@@ -165,4 +185,3 @@ class DocumentProcessingService:
                 extraction_confidence=evidence.confidence if evidence else draft.confidence_score,
             )
         )
-
