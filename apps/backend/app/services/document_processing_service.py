@@ -2,7 +2,8 @@ from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
-from app.core.errors import AppError
+from app.core.codes import ErrorCode
+from app.core.errors import BusinessError
 from app.models.experience import Experience
 from app.models.experience_source import ExperienceSource
 from app.repositories.chunk_repository import ChunkRepository
@@ -44,9 +45,9 @@ class DocumentProcessingService:
     def process(self, document_id: str) -> tuple[str, int, int]:
         document = self.documents.get(document_id)
         if document is None:
-            raise AppError(404, "document_not_found", "Document not found.")
+            raise BusinessError(ErrorCode.DOCUMENT_NOT_FOUND)
         if not document.raw_text:
-            raise AppError(400, "missing_raw_text", "Document has no raw_text.")
+            raise BusinessError(ErrorCode.MISSING_RAW_TEXT)
 
         try:
             document.cleaned_text = self.cleaner.clean(document.raw_text)
@@ -82,9 +83,9 @@ class DocumentProcessingService:
             document.status = "failed"
             document.doc_metadata = {**(document.doc_metadata or {}), "processing_error": str(exc)}
             self.db.commit()
-            if isinstance(exc, AppError):
+            if isinstance(exc, BusinessError):
                 raise
-            raise AppError(500, "document_processing_failed", str(exc)) from exc
+            raise BusinessError(ErrorCode.DOCUMENT_PROCESSING_FAILED, str(exc)) from exc
 
     @staticmethod
     def _is_meaningful_experience(draft: ExperienceDraft) -> bool:

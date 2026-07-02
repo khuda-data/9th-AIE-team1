@@ -2,7 +2,8 @@ from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
-from app.core.errors import AppError
+from app.core.codes import ErrorCode
+from app.core.errors import BusinessError
 from app.models.source_document import SourceDocument
 from app.models.user import User
 from app.repositories.source_document_repository import SourceDocumentRepository
@@ -17,9 +18,9 @@ class DocumentService:
 
     def create_text_document(self, request: TextDocumentCreateRequest) -> SourceDocument:
         if request.source_type not in VALID_SOURCE_TYPES:
-            raise AppError(400, "invalid_source_type", "Unsupported source_type.")
+            raise BusinessError(ErrorCode.INVALID_SOURCE_TYPE)
         if not request.text.strip():
-            raise AppError(400, "empty_text", "text must not be empty.")
+            raise BusinessError(ErrorCode.EMPTY_TEXT)
 
         user = self.db.get(User, request.user_id)
         if user is None:
