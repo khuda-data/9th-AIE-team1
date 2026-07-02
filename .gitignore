@@ -6,5 +6,7 @@ __pycache__/
 .mypy_cache/
 .env
 AGENTS.md
+CLAUDE.md
+uv.lock
 tmp/
 infra/postgres/data/*
