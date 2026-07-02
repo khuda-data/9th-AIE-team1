@@ -4,7 +4,8 @@ from uuid import uuid4
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
-from app.core.errors import AppError
+from app.core.codes import ErrorCode
+from app.core.errors import BusinessError
 from app.models.source_document import SourceDocument
 from app.models.user import User
 from app.repositories.source_document_repository import SourceDocumentRepository
@@ -127,7 +128,7 @@ class NotionImportService:
         settings = get_settings()
         resolved_token = token or settings.notion_api_token
         if not resolved_token:
-            raise AppError(400, "missing_notion_token", "notion_token or NOTION_API_TOKEN is required.")
+            raise BusinessError(ErrorCode.MISSING_NOTION_TOKEN)
         return NotionClient(resolved_token, settings.notion_api_version)
 
     def _processor(self) -> DocumentProcessingService:

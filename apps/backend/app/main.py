@@ -1,8 +1,14 @@
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import documents, experiences, health, notion, questions, retrieval
-from app.core.errors import AppError, app_error_handler, unhandled_error_handler
+from app.core.errors import (
+    BusinessError,
+    business_error_handler,
+    unhandled_error_handler,
+    validation_error_handler,
+)
 
 
 def create_app() -> FastAPI:
@@ -20,7 +26,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    app.add_exception_handler(AppError, app_error_handler)
+    app.add_exception_handler(BusinessError, business_error_handler)
+    app.add_exception_handler(RequestValidationError, validation_error_handler)
     app.add_exception_handler(Exception, unhandled_error_handler)
 
     app.include_router(health.router)

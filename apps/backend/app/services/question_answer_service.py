@@ -3,7 +3,8 @@ from datetime import date, datetime, timezone
 
 from sqlalchemy.orm import Session
 
-from app.core.errors import AppError
+from app.core.codes import ErrorCode
+from app.core.errors import BusinessError
 from app.repositories.chunk_repository import ChunkRepository
 from app.repositories.experience_repository import ExperienceRepository
 from app.repositories.question_repository import QuestionRepository
@@ -27,10 +28,10 @@ class QuestionAnswerService:
     def answer(self, question_id: str, answer: str) -> tuple[str, str, float]:
         question = self.questions.get(question_id)
         if question is None:
-            raise AppError(404, "question_not_found", "Question not found.")
+            raise BusinessError(ErrorCode.QUESTION_NOT_FOUND)
         experience = self.experiences.get(question.experience_id)
         if experience is None:
-            raise AppError(404, "experience_not_found", "Experience not found.")
+            raise BusinessError(ErrorCode.EXPERIENCE_NOT_FOUND)
 
         question.answer = answer
         question.status = "answered"

@@ -4,7 +4,8 @@ from typing import Any
 
 import httpx
 
-from app.core.errors import AppError
+from app.core.codes import ErrorCode
+from app.core.errors import BusinessError
 
 
 @dataclass
@@ -90,13 +91,12 @@ class NotionClient:
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as exc:
-            raise AppError(
-                exc.response.status_code,
-                "notion_api_error",
-                f"Notion API request failed: {exc.response.text}",
+            raise BusinessError(
+                ErrorCode.NOTION_API_ERROR,
+                f"status={exc.response.status_code} {exc.response.text}",
             ) from exc
         except httpx.HTTPError as exc:
-            raise AppError(502, "notion_api_unavailable", str(exc)) from exc
+            raise BusinessError(ErrorCode.NOTION_API_UNAVAILABLE, str(exc)) from exc
 
     @classmethod
     def _page_title(cls, page: dict[str, Any]) -> str | None:
